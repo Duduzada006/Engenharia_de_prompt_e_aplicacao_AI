@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MensWear - Loja de Roupas Masculinas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header e Navegação */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00bcd4;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #00bcd4;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Banner Principal */
+        .banner {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%231a1a1a" width="1200" height="400"/><circle cx="200" cy="100" r="80" fill="%2300bcd4" opacity="0.1"/><circle cx="1000" cy="300" r="120" fill="%2300bcd4" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease;
+        }
+
+        .banner p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease;
+        }
+
+        .btn-primary {
+            background: #00bcd4;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #00a0c0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,188,212,0.3);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Seção de Categorias */
+        .categories {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .categories h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #1a1a1a;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .category-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            margin-bottom: 0.5rem;
+            color: #00bcd4;
+        }
+
+        .category-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Seção de Produtos */
+        .products {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .products h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #1a1a1a;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #00bcd4;
+            background: white;
+            color: #00bcd4;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #00bcd4;
+            color: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: #00bcd4;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00bcd4;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #00a0c0;
+        }
+
+        /* Seção de Promoção */
+        .promo {
+            background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .promo h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .promo p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #00bcd4;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #00bcd4;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Modal do Carrinho */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-modal.active {
+            display: flex;
+        }
+
+        .cart-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 1rem;
+        }
+
+        .cart-header h2 {
+            color: #1a1a1a;
+        }
+
+        .close-cart {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #1a1a1a;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            gap: 1rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .cart-item-price {
+            color: #00bcd4;
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .qty-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: #00bcd4;
+            color: white;
+        }
+
+        .remove-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .remove-btn:hover {
+            background: #ff5252;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 1.5rem;
+            background: #f5f5f5;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #00a0c0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .category-grid,
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-section {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">👕 MensWear</div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('categories')">Categorias</a></li>
+                <li><a onclick="scrollToSection('products')">Produtos</a></li>
+                <li><a onclick="scrollToSection('footer')">Contato</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="banner">
+        <h1>Bem-vindo à MensWear</h1>
+        <p>A maior variedade de roupas masculinas de qualidade</p>
+        <button class="btn-primary" onclick="scrollToSection('products')">Compre Agora</button>
+    </section>
+
+    <!-- Categorias -->
+    <section class="categories" id="categories">
+        <h2>Nossas Categorias</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="filterByCategory('bebes')">
+                <div class="category-image">👶</div>
+                <div class="category-info">
+                    <h3>Bebês</h3>
+                    <p>0-2 anos</p>
+                </div>
+            </div>
+            <div class="category-card" onclick="filterByCategory('criancas')">
+                <div class="category-image">👦</div>
+                <div class="category-info">
+                    <h3>Crianças</h3>
+                    <p>3-12 anos</p>
+                </div>
+            </div>
+            <div class="category-card" onclick="filterByCategory('adolescentes')">
+                <div class="category-image">🧑</div>
+                <div class="category-info">
+                    <h3>Adolescentes</h3>
+                    <p>13-17 anos</p>
+                </div>
+            </div>
+            <div class="category-card" onclick="filterByCategory('adultos')">
+                <div class="category-image">👨</div>
+                <div class="category-info">
+                    <h3>Adultos</h3>
+                    <p>18+ anos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Promoção -->
+    <section class="promo">
+        <h2>🎉 Promoção Especial</h2>
+        <p>Até 50% de desconto em roupas selecionadas!</p>
+        <button class="btn-primary" style="background: white; color: #00bcd4;" onclick="scrollToSection('products')">Ver Produtos em Oferta</button>
+    </section>
+
+    <!-- Produtos -->
+    <section class="products" id="products">
+        <h2>Nossos Produtos</h2>
+        <div class="filter-section">
+            <button class="filter-btn active" onclick="filterByType('todos', this)">Todos</button>
+            <button class="filter-btn" onclick="filterByType('camisetas', this)">Camisetas</button>
+            <button class="filter-btn" onclick="filterByType('calcas', this)">Calças</button>
+            <button class="filter-btn" onclick="filterByType('jaquetas', this)">Jaquetas</button>
+            <button class="filter-btn" onclick="filterByType('acessorios', this)">Acessórios</button>
+        </div>
+        <div class="product-grid" id="productGrid">
+            <!-- Produtos serão gerados aqui -->
+        </div>
+    </section>
+
+    <!-- Modal do Carrinho -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Carrinho de Compras</h2>
+                <span class="close-cart" onclick="toggleCart()">×</span>
+            </div>
+            <div id="cartItems"></div>
+            <div id="cartTotal"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>A MensWear é especializada em roupas masculinas de qualidade para todas as idades, oferecendo conforto e estilo.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Informações</h3>
+                <ul>
+                    <li><a href="#">Quem Somos</a></li>
+                    <li><a href="#">Políticas de Privacidade</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">Trocas e Devoluções</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Atendimento</h3>
+                <ul>
+                    <li><a href="#">Contate-nos</a></li>
+                    <li><a href="#">Suporte</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Rastreamento</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MensWear. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Base de dados de produtos
+        const produtos = [
+            // BEBÊS
+            {
+                id: 1,
+                nome: 'Body Bebê Azul',
+                categoria: 'bebes',
+                tipo: 'camisetas',
+                descricao: 'Body confortável para bebês',
+                preco: 39.90,
+                precoAntigo: 59.90,
+                desconto: 33,
+                rating: 5
+            },
+            {
+                id: 2,
+                nome: 'Macacão Bebê Rosa',
+                categoria: 'bebes',
+                tipo: 'calcas',
+                descricao: 'Macacão macio e aconchegante',
+                preco: 49.90,
+                precoAntigo: 79.90,
+                desconto: 37,
+                rating: 5
+            },
+            {
+                id: 3,
+                nome: 'Jaqueta Bebê Branca',
+                categoria: 'bebes',
+                tipo: 'jaquetas',
+                descricao: 'Jaqueta de inverno para bebés',
+                preco: 89.90,
+                precoAntigo: 129.90,
+                desconto: 30,
+                rating: 4
+            },
+            {
+                id: 4,
+                nome: 'Gorro Bebê Cinza',
+                categoria: 'bebes',
+                tipo: 'acessorios',
+                descricao: 'Gorro morno para bebés',
+                preco: 29.90,
+                precoAntigo: 49.90,
+                desconto: 40,
+                rating: 5
+            },
+
+            // CRIANÇAS
+            {
+                id: 5,
+                nome: 'Camiseta Infantil Azul',
+                categoria: 'criancas',
+                tipo: 'camisetas',
+                descricao: 'Camiseta de algodão 100%',
+                preco: 44.90,
+                precoAntigo: 69.90,
+                desconto: 35,
+                rating: 5
+            },
+            {
+                id: 6,
+                nome: 'Calça Infantil Jeans',
+                categoria: 'criancas',
+                tipo: 'calcas',
+                descricao: 'Calça jeans confortável',
+                preco: 64.90,
+                precoAntigo: 99.90,
+                desconto: 35,
+                rating: 4
+            },
+            {
+                id: 7,
+                nome: 'Short Infantil Preto',
+                categoria: 'criancas',
+                tipo: 'calcas',
+                descricao: 'Short esportivo infantil',
+                preco: 39.90,
+                precoAntigo: 59.90,
+                desconto: 33,
+                rating: 5
+            },
+            {
+                id: 8,
+                nome: 'Jaqueta Infantil Vermelha',
+                categoria: 'criancas',
+                tipo: 'jaquetas',
+                descricao: 'Jaqueta impermeável',
+                preco: 94.90,
+                precoAntigo: 149.90,
+                desconto: 36,
+                rating: 4
+            },
+            {
+                id: 9,
+                nome: 'Mochila Infantil Azul',
+                categoria: 'criancas',
+                tipo: 'acessorios',
+                descricao: 'Mochila resistente e leve',
+                preco: 79.90,
+                precoAntigo: 129.90,
+                desconto: 38,
+                rating: 5
+            },
+
+            // ADOLESCENTES
+            {
+                id: 10,
+                nome: 'Camiseta Skate Preta',
+                categoria: 'adolescentes',
+                tipo: 'camisetas',
+                descricao: 'Camiseta estilo skate',
+                preco: 59.90,
+                precoAntigo: 89.90,
+                desconto: 33,
+                rating: 5
+            },
+            {
+                id: 11,
+                nome: 'Calça Street Cinza',
+                categoria: 'adolescentes',
+                tipo: 'calcas',
+                descricao: 'Calça street wear confortável',
+                preco: 89.90,
+                precoAntigo: 139.90,
+                desconto: 35,
+                rating: 4
+            },
+            {
+                id: 12,
+                nome: 'Jaqueta Bomber Azul',
+                categoria: 'adolescentes',
+                tipo: 'jaquetas',
+                descricao: 'Jaqueta bomber em alta',
+                preco: 129.90,
+                precoAntigo: 199.90,
+                desconto: 35,
+                rating: 5
+            },
+            {
+                id: 13,
+                nome: 'Boné Street Preto',
+                categoria: 'adolescentes',
+                tipo: 'acessorios',
+                descricao: 'Boné estilo street',
+                preco: 49.90,
+                precoAntigo: 79.90,
+                desconto: 37,
+                rating: 5
+            },
+            {
+                id: 14,
+                nome: 'Moletom Cinzento',
+                categoria: 'adolescentes',
+                tipo: 'jaquetas',
+                descricao: 'Moletom quentinho',
+                preco: 99.90,
+                precoAntigo: 149.90,
+                desconto: 33,
+                rating: 4
+            },
+
+            // ADULTOS
+            {
+                id: 15,
+                nome: 'Camiseta Premium Preta',
+                categoria: 'adultos',
+                tipo: 'camisetas',
+                descricao: 'Camiseta premium de algodão',
+                preco: 69.90,
+                precoAntigo: 99.90,
+                desconto: 30,
+                rating: 5
+            },
+            {
+                id: 16,
+                nome: 'Calça Social Cinza',
+                categoria: 'adultos',
+                tipo: 'calcas',
+                descricao: 'Calça social impecável',
+                preco: 129.90,
+                precoAntigo: 199.90,
+                desconto: 35,
+                rating: 5
+            },
+            {
+                id: 17,
+                nome: 'Jaqueta de Couro Marrom',
+                categoria: 'adultos',
+                tipo: 'jaquetas',
+                descricao: 'Jaqueta premium de couro',
+                preco: 299.90,
+                precoAntigo: 449.90,
+                desconto: 33,
+                rating: 5
+            },
+            {
+                id: 18,
+                nome: 'Cinto de Couro Preto',
+                categoria: 'adultos',
+                tipo: 'acessorios',
+                descricao: 'Cinto premium de couro',
+                preco: 79.90,
+                precoAntigo: 129.90,
+                desconto: 38,
+                rating: 5
+            },
+            {
+                id: 19,
+                nome: 'Polo Branca',
+                categoria: 'adultos',
+                tipo: 'camisetas',
+                descricao: 'Polo clássica e elegante',
+                preco: 84.90,
+                precoAntigo: 129.90,
+                desconto: 34,
+                rating: 4
+            },
+            {
+                id: 20,
+                nome: 'Jaqueta Puffer Preta',
+                categoria: 'adultos',
+                tipo: 'jaquetas',
+                descricao: 'Jaqueta puffer impermeável',
+                preco: 189.90,
+                precoAntigo: 299.90,
+                desconto: 36,
+                rating: 5
+            }
+        ];
+
+        let carrinho = [];
+        let filtroAtual = 'todos';
+        let categoriaAtual = null;
+
+        // Renderizar produtos iniciais
+        function renderizarProdutos(filtro = 'todos', categoria = null) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            let produtosFiltrados = produtos;
+
+            if (categoria) {
+                produtosFiltrados = produtosFiltrados.filter(p => p.categoria === categoria);
+            }
+
+            if (filtro !== 'todos') {
+                produtosFiltrados = produtosFiltrados.filter(p => p.tipo === filtro);
+            }
+
+            if (produtosFiltrados.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999; padding: 2rem;">Nenhum produto encontrado.</p>';
+                return;
+            }
+
+            produtosFiltrados.forEach(produto => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">
+                        ${produto.tipo === 'camisetas' ? '👕' : produto.tipo === 'calcas' ? '👖' : produto.tipo === 'jaquetas' ? '🧥' : '⌚'}
+                        ${produto.desconto > 0 ? `<div class="discount-badge">-${produto.desconto}%</div>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${produto.categoria.charAt(0).toUpperCase() + produto.categoria.slice(1)}</div>
+                        <div class="product-name">${produto.nome}</div>
+                        <div class="product-description">${produto.descricao}</div>
+                        <div class="product-rating">${'⭐'.repeat(produto.rating)}</div>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">R$ ${produto.preco.toFixed(2)}</span>
+                                ${produto.precoAntigo ? `<div class="old-price">R$ ${produto.precoAntigo.toFixed(2)}</div>` : ''}
+                            </div>
+                        </div>
+                        <button class="add-to-cart" onclick="adicionarAoCarrinho(${produto.id})">Adicionar ao Carrinho</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterByType(tipo, btn) {
+            filtroAtual = tipo;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderizarProdutos(tipo, categoriaAtual);
+        }
+
+        function filterByCategory(categoria) {
+            categoriaAtual = categoria;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.filter-btn').classList.add('active');
+            filtroAtual = 'todos';
+            renderizarProdutos('todos', categoria);
+        }
+
+        function adicionarAoCarrinho(produtoId) {
+            const produto = produtos.find(p => p.id === produtoId);
+            const itemExistente = carrinho.find(item => item.id === produtoId);
+
+            if (itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                carrinho.push({ ...produto, quantidade: 1 });
+            }
+
+            atualizarCarrinho();
+            alert(`${produto.nome} adicionado ao carrinho!`);
+        }
+
+        function atualizarCarrinho() {
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = carrinho.reduce((total, item) => total + item.quantidade, 0);
+
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartTotalDiv = document.getElementById('cartTotal');
+
+            if (carrinho.length === 0) {
+                cartItemsDiv.innerHTML = '<div class="cart-empty">Seu carrinho está vazio</div>';
+                cartTotalDiv.innerHTML = '';
+                return;
+            }
+
+            cartItemsDiv.innerHTML = carrinho.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.nome}</div>
+                        <div class="cart-item-price">R$ ${item.preco.toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="qty-btn" onclick="alterarQuantidade(${item.id}, -1)">-</button>
+                        <span>${item.quantidade}</span>
+                        <button class="qty-btn" onclick="alterarQuantidade(${item.id}, 1)">+</button>
+                    </div>
+                    <button class="remove-btn" onclick="removerDoCarrinho(${item.id})">Remover</button>
+                </div>
+            `).join('');
+
+            const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            cartTotalDiv.innerHTML = `
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span>R$ ${total.toFixed(2)}</span>
+                </div>
+                <button class="checkout-btn" onclick="finalizarCompra()">Finalizar Compra</button>
+            `;
+        }
+
+        function alterarQuantidade(produtoId, quantidade) {
+            const item = carrinho.find(p => p.id === produtoId);
+            if (item) {
+                item.quantidade += quantidade;
+                if (item.quantidade <= 0) {
+                    removerDoCarrinho(produtoId);
+                } else {
+                    atualizarCarrinho();
+                }
+            }
+        }
+
+        function removerDoCarrinho(produtoId) {
+            carrinho = carrinho.filter(item => item.id !== produtoId);
+            atualizarCarrinho();
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('active');
+        }
+
+        function finalizarCompra() {
+            if (carrinho.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
+            }
+
+            const total = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            alert(`Compra finalizada! Total: R$ ${total.toFixed(2)}\n\nObrigado pela compra!`);
+            carrinho = [];
+            atualizarCarrinho();
+            toggleCart();
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Inicializar
+        renderizarProdutos();
+    </script>
+</body>
+</html>
